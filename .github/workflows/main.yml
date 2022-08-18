@@ -11,5 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
       - name: Echo
-        run: echo $SHORT_SHA
+        run: echo ${{ steps.vars.outputs.sha_short }}
