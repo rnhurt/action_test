@@ -1,0 +1,15 @@
+name: TEST
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SHORT_SHA: ${GITHUB_SHA::7}
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run show version
+        run: echo "SHA_SHORT: ${{ env.SHA_SHORT}}"
+        
