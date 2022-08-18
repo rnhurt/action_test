@@ -5,8 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SHORT_SHA: ${{ git rev-parse --short HEAD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -14,6 +12,9 @@ jobs:
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Set outputs2
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
 
       - name: Echo
         run: echo ${{ steps.vars.outputs.sha_short }}
